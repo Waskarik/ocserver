@@ -1,0 +1,38 @@
+{
+  "name": "badfish-server",
+  "version": "1.0.2",
+  "description": "Backend API for BadFish Redux - Ironhack Project #3",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "check": "node --check server.js && node --check app.js && node --check config/db.js && node --check config/env.js && node --check middleware/isAuthenticated.js && node --check middleware/errorHandler.js && node --check models/User.model.js && node --check models/FishingLog.model.js && node --check models/FishingList.model.js && node --check models/TrackerEntry.model.js && node --check routes/auth.routes.js && node --check routes/users.routes.js && node --check routes/logs.routes.js && node --check routes/lists.routes.js && node --check routes/tracker.routes.js",
+    "audit:prod": "npm audit --omit=dev"
+  },
+  "keywords": [
+    "badfish",
+    "ffxiv",
+    "express",
+    "mongodb",
+    "mongoose",
+    "jwt"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.4",
+    "morgan": "^1.12.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
