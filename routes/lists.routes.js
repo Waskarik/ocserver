@@ -40,7 +40,7 @@ router.post("/", async (req, res, next) => {
 
     if (normalizedFishIds === null) {
       return res.status(400).json({
-        message: "fishIds must be an array of positive integers."
+        message: "fishIds has to be an array"
       });
     }
 

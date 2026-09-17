@@ -10,7 +10,7 @@ const router = express.Router();
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 20,
+  limit: 15,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   message: {
@@ -39,7 +39,7 @@ function validateCredentials(username, email, password) {
     typeof email !== "string" ||
     typeof password !== "string"
   ) {
-    return "Username, email and password must be strings.";
+    return "Username, email and password must be text.";
   }
 
   if (!username.trim() || !email.trim() || !password) {
@@ -49,7 +49,7 @@ function validateCredentials(username, email, password) {
   const passwordBytes = Buffer.byteLength(password, "utf8");
 
   if (passwordBytes < 8 || passwordBytes > 72) {
-    return "Password must be between 8 and 72 UTF-8 bytes.";
+    return "Password must be at least 8 caracters long.";
   }
 
   return null;
@@ -122,7 +122,7 @@ router.post("/login", authLimiter, async (req, res, next) => {
 
     if (typeof email !== "string" || typeof password !== "string") {
       return res.status(400).json({
-        message: "Email and password must be strings."
+        message: "Email and password must be a text."
       });
     }
 
@@ -180,7 +180,7 @@ router.post("/logout", isAuthenticated, async (req, res, next) => {
     });
 
     return res.status(200).json({
-      message: "Logged out. Existing tokens have been revoked."
+      message: "Logged out"
     });
   } catch (error) {
     next(error);
