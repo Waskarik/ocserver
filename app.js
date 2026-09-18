@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const connectDB = require("./config/db");
 const trackerRoutes = require("./routes/tracker.routes");
 
 
@@ -50,6 +51,15 @@ app.get("/api", (req, res) => {
     message: "BadFish API is swimming 🐟",
     status: "ok"
   });
+});
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.use("/api/auth", authRoutes);
